@@ -198,7 +198,7 @@
         "# Save audit files\n",
         "usd_prices.reset_index().rename(columns={\"index\":\"Date\"}).to_excel(os.path.join(OUT, \"workpaper2_usd_prices_by_stock.xlsx\"), index=False)\n",
         "usd_returns.reset_index().rename(columns={\"index\":\"Date\"}).to_excel(os.path.join(OUT, \"workpaper2_usd_returns_by_stock.xlsx\"), index=False)\n",
-        "print(\"✅ Saved per-stock USD prices/returns for audit.\")\n",
+        "print(\"Saved per-stock USD prices/returns for audit.\")\n",
         "\n",
         "# ------------------ Build bucket equal-weight returns ------------------\n",
         "buckets = pd.DataFrame(index=usd_returns.index, columns=bucket_cols, dtype=float)\n",
@@ -208,7 +208,7 @@
         "\n",
         "bucket_file = os.path.join(OUT, \"bucket_log_returns.xlsx\")\n",
         "buckets.reset_index().rename(columns={\"index\":\"Date\"}).to_excel(bucket_file, index=False)\n",
-        "print(f\"✅ Saved bucket returns: {bucket_file}\")\n",
+        "print(f\"Saved bucket returns: {bucket_file}\")\n",
         "\n",
         "# ------------------ Load factors, proxies, policy ------------------\n",
         "# FF5 (US) + RF\n",
@@ -221,7 +221,7 @@
         "    if c not in ff5.columns: raise ValueError(f\"FF5 missing {c}\")\n",
         "ff5 = ff5[need_ff].astype(float)\n",
         "if ff5[\"RF\"].dropna().mean() > 0.01:\n",
-        "    print(\"⚠️ RF appears in percent; converting by /100.\")\n",
+        "    print(\"RF appears in percent; converting by /100.\")\n",
         "    ff5[\"RF\"] = ff5[\"RF\"]/100.0\n",
         "\n",
         "# Brent\n",
@@ -335,7 +335,7 @@
         "plt.title(\"Drawdowns — All Buckets\"); plt.xlabel(\"Date\"); plt.legend(); plt.tight_layout()\n",
         "plt.savefig(os.path.join(OUT, \"drawdowns_all.png\"), dpi=150); plt.close()\n",
         "\n",
-        "print(\"✅ Part 1 saved:\", os.path.join(OUT,\"rolling_metrics_252d.xlsx\"))\n",
+        "print(\"Part 1 saved:\", os.path.join(OUT,\"rolling_metrics_252d.xlsx\"))\n",
         "\n",
         "# ------------------ Part 2: Event Study (CAR = sum of ARs) ------------------\n",
         "# Build master on bucket calendar\n",
@@ -570,7 +570,7 @@
         "\n",
         "car_by_sign_bar(model_pos, model_neg, \"Model-Adjusted CARs by Policy Sign (sum of ARs)\", \"model_CAR_by_sign_bars.png\")\n",
         "\n",
-        "print(\"✅ Part 2 saved:\", os.path.join(OUT,\"event_study_results.xlsx\"))\n",
+        "print(\"Part 2 saved:\", os.path.join(OUT,\"event_study_results.xlsx\"))\n",
         "\n",
         "# ------------------ Risk deep-dive ------------------\n",
         "def drawdown_series(r):\n",
@@ -688,7 +688,7 @@
         "bar_two(risk_tail, [\"VaR95\",\"ES95\"], \"Tail Risk (95%) — VaR & ES (daily)\", \"tail_95_bars.png\")\n",
         "bar_two(risk_tail, [\"VaR99\",\"ES99\"], \"Tail Risk (99%) — VaR & ES (daily)\", \"tail_99_bars.png\")\n",
         "\n",
-        "print(\"\\n🎯 Done. All outputs in:\", OUT)\n"
+        "print(\"\\nDone. All outputs in:\", OUT)\n"
       ],
       "metadata": {
         "colab": {
@@ -720,8 +720,8 @@
           "name": "stdout",
           "text": [
             "Columns after cleaning: ['Vestas Wind', 'Oersted AS', 'USD/DKK', 'Nel ASA', 'USD/NOK', 'Bloom Energy', 'NextEra Energy', 'Plug Power', 'AC Energy Philippines Inc', 'USD/PHP', 'Tata Power', 'USD/INR', 'China Longyuan Power Group', 'USD/HKD', 'ACWA Power', 'USD/SAR', 'Adani Green Energy', 'Sembcorp', 'USD/SGD']\n",
-            "✅ Saved per-stock USD prices/returns for audit.\n",
-            "✅ Saved bucket returns: /content/drive/MyDrive/sep15.3.0/bucket_log_returns.xlsx\n",
+            "Saved per-stock USD prices/returns for audit.\n",
+            "Saved bucket returns: /content/drive/MyDrive/sep15.3.0/bucket_log_returns.xlsx\n",
             "✓ Found FF5.csv: /content/drive/MyDrive/FF5.csv\n"
           ]
         },
@@ -799,11 +799,11 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "✅ Part 1 saved: /content/drive/MyDrive/sep15.3.0/rolling_metrics_252d.xlsx\n",
+            "Part 1 saved: /content/drive/MyDrive/sep15.3.0/rolling_metrics_252d.xlsx\n",
             "Events available: 96\n",
-            "✅ Part 2 saved: /content/drive/MyDrive/sep15.3.0/event_study_results.xlsx\n",
+            "Part 2 saved: /content/drive/MyDrive/sep15.3.0/event_study_results.xlsx\n",
             "\n",
-            "🎯 Done. All outputs in: /content/drive/MyDrive/sep15.3.0\n"
+            "Done. All outputs in: /content/drive/MyDrive/sep15.3.0\n"
           ]
         }
       ]
@@ -1148,7 +1148,7 @@
         "        ws2.conditional_format(1, col_p, len(placebo_out), col_p,\n",
         "                               {\"type\":\"cell\",\"criteria\":\"<=\",\"value\":0.05,\"format\":w.book.add_format({\"bg_color\":\"#C6EFCE\"})})\n",
         "\n",
-        "print(f\"✅ Robustness Excel saved: {ROB_XLSX}\")\n",
+        "print(f\"Robustness Excel saved: {ROB_XLSX}\")\n",
         "print(\"Sheets:\")\n",
         "print(\" - spec_compare: Original(FF5+macro) vs Macro-only comparison of CAR means (diffs, % change, t-stats, N)\")\n",
         "print(\" - summary_FF5 / summary_macro_only: per-spec CAR stats (mean, std, se, t)\")\n",
@@ -1167,7 +1167,7 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "✅ Robustness Excel saved: /content/drive/MyDrive/2ndtrial/outputs_portfolio/robustness_checks.xlsx\n",
+            "Robustness Excel saved: /content/drive/MyDrive/2ndtrial/outputs_portfolio/robustness_checks.xlsx\n",
             "Sheets:\n",
             " - spec_compare: Original(FF5+macro) vs Macro-only comparison of CAR means (diffs, % change, t-stats, N)\n",
             " - summary_FF5 / summary_macro_only: per-spec CAR stats (mean, std, se, t)\n",
